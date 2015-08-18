@@ -1,0 +1,12 @@
+<h1>Subscribe</h1>
+<%= form_tag "/subscribe" do %>
+  <div>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+  </div>
+  <div>
+    <%= label_tag :email %>
+    <%= email_field_tag :email %>
+  </div>
+  <%= submit_tag "Subscribe" %>
+<% end %>

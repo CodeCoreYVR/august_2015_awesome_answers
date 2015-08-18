@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get "/contact" => "contact#index"
   post "/contact" => "contact#create"
 
+  get "/subscribe" => "subscribe#index"
+  post "/subscribe" => "subscribe#create"
+
   # this wil match any url /hello/something with GET request
   # in order to give a url a URL / PATH helper we provide it
   # with the as: option. The URL helper will be whatever you put
