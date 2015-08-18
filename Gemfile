@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# When we add or update a gem in this file bunlder updates the Gemfile.lock which `locks` the version to the one installed the first time so if another devloper takes on the project and run `bundle` he/she will get the same version.
+
+# we run `bundle` or `bundle install` if we add/remove gems which will update the Gemfile.lock file
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -23,6 +26,9 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Gem faker is used to generate fake data
+gem "cowsay", ">= 0.0.5"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -42,4 +48,3 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

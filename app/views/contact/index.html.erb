@@ -1,0 +1,36 @@
+<h1>Contact Us</h1>
+
+<%= form_tag "/contact" do %>
+  <div>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+  </div>
+  <div>
+    <%= label_tag :email %>
+    <%= email_field_tag :email %>
+  </div>
+  <%= submit_tag "Contact Us" %>
+<% end %>
+<!--
+<form action="/contact" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="YpGmwUucMCNTbG71eVo3WHMkdqFwI/YtGgIm/xO9bvgC0lHj8i2RXc6spa45WECPF+AbDHRrBeLcqLCE6ODDHw==">
+  <input type="submit" name="commit" value="Contact Us">
+</form> -->
+
+<h2>Playing with URLs</h2>
+<%= hello_path %>
+<%# /hello %>
+<hr>
+<%= hello_url %>
+<%# http://localhost:3000/hello %>
+<hr>
+<%= greet_path({name: "Tam"}) %>
+<%# /hello/Tam %>
+<hr>
+<%# this is a shortcut for the path above %>
+<%= greet_path("Tam") %>
+<%# /hello/Tam %>
+<hr>
+<%= greet_url({name: "Tam", city: "Burnaby"}) %>
+<%# http://localhost:3000/hello/Tam?city=Burnaby %>
+<hr>
+<%= full_greeting_path("Tam", "Burnaby") %>
