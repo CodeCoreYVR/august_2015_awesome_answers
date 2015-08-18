@@ -27,7 +27,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Gem faker is used to generate fake data
-gem "cowsay", ">= 0.0.5"
+gem "cowsay", ">= 0.2.0"
+
+gem "faker"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
