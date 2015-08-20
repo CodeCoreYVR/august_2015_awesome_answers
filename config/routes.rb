@@ -1,21 +1,26 @@
 Rails.application.routes.draw do
 
-  # this will match any GET request to a url "/questions/new" to the Questions
-  # controller and new action within that controller.
-  # Adding the as: :new_question option enables us to have a handy URL helper
-  # method that we can use in the views and controllers. The method in this
-  # case will be new_question_path or new_question_url
-  get "/questions/new" => "questions#new", as: :new_question
+  resources :questions
+  # resources questions auto-generates all the routes below
 
-  post "/questions" => "questions#create", as: :questions # => questions_path
-
-  get "/questions/:id" => "questions#show", as: :question
-
-  get "/questions" => "questions#index"
-
-  get "/questions/:id/edit" => "questions#edit", as: :edit_question
-
-  patch "/questions/:id" => "questions#update"
+  # # this will match any GET request to a url "/questions/new" to the Questions
+  # # controller and new action within that controller.
+  # # Adding the as: :new_question option enables us to have a handy URL helper
+  # # method that we can use in the views and controllers. The method in this
+  # # case will be new_question_path or new_question_url
+  # get "/questions/new" => "questions#new", as: :new_question
+  #
+  # post "/questions" => "questions#create", as: :questions # => questions_path
+  #
+  # get "/questions/:id" => "questions#show", as: :question
+  #
+  # get "/questions" => "questions#index"
+  #
+  # get "/questions/:id/edit" => "questions#edit", as: :edit_question
+  #
+  # patch "/questions/:id" => "questions#update"
+  #
+  # delete "/questions/:id" => "questions#destroy"
 
   # this will match a GET request to "/hello" url
   # it will invoke the index method (which is called action)

@@ -60,4 +60,12 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # DELETE /questions/:id (e.g. /questions/123)
+  # this is used to delete a question from the database
+  def destroy
+    @question = Question.find params[:id]
+    @question.destroy
+    redirect_to questions_path
+  end
+
 end
