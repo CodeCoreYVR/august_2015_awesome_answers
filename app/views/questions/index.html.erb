@@ -1,0 +1,8 @@
+<h1>All Questions</h1>
+<% @questions.each do |q| %>
+  <%#= link_to q.title, question_path({id: q.id}) %>
+  <%#= link_to q.title, q %>
+  <div>
+    <%= link_to q.title, question_path(q) %>
+  </div>
+<% end %>

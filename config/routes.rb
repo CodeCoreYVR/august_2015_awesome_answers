@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   # case will be new_question_path or new_question_url
   get "/questions/new" => "questions#new", as: :new_question
 
-  post "/abc" => "questions#create", as: :questions # => questions_path
+  post "/questions" => "questions#create", as: :questions # => questions_path
+
+  get "/questions/:id" => "questions#show", as: :question
+
+  get "/questions" => "questions#index"
 
   # this will match a GET request to "/hello" url
   # it will invoke the index method (which is called action)
