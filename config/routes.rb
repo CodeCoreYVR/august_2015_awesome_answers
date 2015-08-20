@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   get "/questions" => "questions#index"
 
+  get "/questions/:id/edit" => "questions#edit", as: :edit_question
+
+  patch "/questions/:id" => "questions#update"
+
   # this will match a GET request to "/hello" url
   # it will invoke the index method (which is called action)
   # with in WelcomeController which is located in app/controllers folder
