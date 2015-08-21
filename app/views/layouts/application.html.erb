@@ -19,6 +19,7 @@
   <%= link_to "All Questions", questions_path %>
   <%= link_to "New Question", new_question_path %>
 </nav>
+<%= notice || alert %>
 <%= yield %>
 
 </body>

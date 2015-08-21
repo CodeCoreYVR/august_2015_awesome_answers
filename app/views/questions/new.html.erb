@@ -1,43 +1,12 @@
 <h1>Create a question</h1>
-<% if @question.errors.any? %>
-  <ul>
-    <% @question.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-<%# the form_for helper method can take an ActiveRecord object as a first arguement
-    for instance, @question which is of class Question.
-    Rails, by convention, will do the following:
-    1. If @question is not persisted in the database, it will make the action for
-       the form `questions_path`. It will look for the class name of the passed
-       object (in this case its Question) and by convention submit to questions_path.
-       It will also make the method POST in this case. (New / Create)
-    2. If @question is persisted to the database, it will make the action for
-      the form go to question_path (/questions/:id) (where :id is the id of
-      @question) and it will make the form submit a PATCH request in order for this
-      form to submit to the update action in our controller. (Edit / Update)
-    %>
-<%= form_for @question do |f| %>
-  <%# if you don't pass any option for f.submit it will:
-      1. If @question is not persisted it will make the button label "Create [Object Class]"
-      2. If @question is persisted it will make the button label "Update [Object Class]" %>
-  <div>
-    <%= f.label :title %>
-    <%# using f.text_field ensures that Rails will use the proper `name` HTML
-        attribute and it will also populate the text field with data if @question
-        title has a value %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
-  <%= f.submit  %>
-<% end %>
-<!--
-<form class="new_question" id="new_question" action="/questions" accept-charset="UTF-8" method="post">
-  <input name="utf8" type="hidden" value="✓">
-  <input type="hidden" name="authenticity_token" value="LSe9Xblfla1XasfnOzKfDuXvJEj8znZF+VOi8SLToy1NZEp/AO4008qqDLx7MOjZgStJ5fiGhYo/+TSK2Y4Oyg==">
-  <input type="submit" name="commit" value="Create Question">
-</form> -->
+
+<%# render is going to look for a partial meaning a view file that starts with
+    an `_` if you don't specify full path it will look in the same folder as
+    this file's folder. In this case it will look in views/questions folder.
+    You can specify full path such as: render "/questions/form"
+    - Partial have access to instance varialbes so no need to pass them. For
+      instance. the _form.html.erb partial have access to @question
+    - If you want to pass local variables to partial then you can pass them
+      as a hash to the render method. e.g: render "form", greeting: "Hello"
+     %>
+<%= render "form" %>

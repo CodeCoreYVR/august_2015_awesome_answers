@@ -1,4 +1,10 @@
 class QuestionsController < ApplicationController
+  # the before action takes in a required first argument which references a method
+  # that will be executed before every action. You can give it a second arguement
+  # which is a hash, possible keys are :only and :except if you want to restrict
+  # the method calls to specific actions
+  # before_action :find_question, except: [:index, :new, :create]
+  before_action :find_question, only: [:show, :edit, :update, :destroy]
 
   # the new action is the one that is used by convention in Rails to display
   # a form to create the record (in this case question record)
@@ -10,16 +16,13 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    # params[:question] => {title: "Abc", body: "xyz"}
-    # params.require ensures that the params hash has a key :question and
-    # fetches all the attributes from that hash. the .permit only allows
-    # the parameters given to be mass-assigned
-    question_params = params.require(:question).permit([:title, :body])
-    # question_params =>  {title: "Abc", body: "xyz"}
     @question = Question.new(question_params)
     if @question.save
-      redirect_to question_path(@question)
+      # flash[:notice] = "Question created!"
+      # passing :notice / :alert only works for redirect
+      redirect_to question_path(@question), notice: "Question created!"
     else
+      flash[:alert] = "See errors below"
       render :new
     end
   end
@@ -27,7 +30,6 @@ class QuestionsController < ApplicationController
   # GET /questions/:id (e.g. /questions/1)
   # this is used to show a page with question information
   def show
-    @question = Question.find params[:id]
   end
 
   # GET /questions
@@ -39,17 +41,12 @@ class QuestionsController < ApplicationController
   # GET /questions/:id/edit (e.g. /questions/123/edit )
   # this is used to show a form to edit and submit to update a question in the database
   def edit
-    @question = Question.find params[:id]
   end
 
   # PATCH /questions/:id (e.g. /questions/123)
   # this is used to handle the submission of the question form from the edit page
   # when user is updating the information on a question
   def update
-    # this is using the strong parameters feature in Rails to only allow
-    # the title and body to be updated in the database
-    question_params = params.require(:question).permit(:title, :body)
-    @question = Question.find params[:id]
     # if updating the question is successful
     if @question.update question_params
       # redirecting to the question show page
@@ -63,9 +60,24 @@ class QuestionsController < ApplicationController
   # DELETE /questions/:id (e.g. /questions/123)
   # this is used to delete a question from the database
   def destroy
-    @question = Question.find params[:id]
     @question.destroy
     redirect_to questions_path
+  end
+
+  private
+
+  def find_question
+    @question = Question.find params[:id]
+  end
+
+  def question_params
+    # params[:question] => {title: "Abc", body: "xyz"}
+    # params.require ensures that the params hash has a key :question and
+    # fetches all the attributes from that hash. the .permit only allows
+    # the parameters given to be mass-assigned
+    # question_params = params.require(:question).permit([:title, :body])
+    # question_params =>  {title: "Abc", body: "xyz"}
+    params.require(:question).permit(:title, :body)
   end
 
 end
