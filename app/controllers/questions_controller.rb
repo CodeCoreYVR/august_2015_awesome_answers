@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+
+  PER_PAGE = 10
   # the before action takes in a required first argument which references a method
   # that will be executed before every action. You can give it a second arguement
   # which is a hash, possible keys are :only and :except if you want to restrict
@@ -35,7 +37,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # this is used to show a page with listing of all the questions in our DB
   def index
-    @questions = Question.all
+    @questions = Question.page(params[:page]).per(PER_PAGE)
   end
 
   # GET /questions/:id/edit (e.g. /questions/123/edit )
