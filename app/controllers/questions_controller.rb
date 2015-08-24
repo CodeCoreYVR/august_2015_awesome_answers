@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # this is used to show a page with listing of all the questions in our DB
   def index
-    @questions = Question.all
+    @questions = Question.page(params[:page]).per(10)
   end
 
   # GET /questions/:id/edit (e.g. /questions/123/edit )
