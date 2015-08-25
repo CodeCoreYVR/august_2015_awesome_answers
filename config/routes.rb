@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  patch "/questions/:id/lock" => "questions#lock", as: :lock_question
   # resources :answers
   resources :questions do
     # nesting resources :answers in here makes every URL for answers prepended

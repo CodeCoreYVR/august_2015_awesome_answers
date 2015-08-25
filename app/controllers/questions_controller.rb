@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   # which is a hash, possible keys are :only and :except if you want to restrict
   # the method calls to specific actions
   # before_action :find_question, except: [:index, :new, :create]
-  before_action :find_question, only: [:show, :edit, :update, :destroy]
+  before_action :find_question, only: [:show, :edit, :update, :destroy, :lock]
 
   # the new action is the one that is used by convention in Rails to display
   # a form to create the record (in this case question record)
@@ -65,6 +65,13 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     redirect_to questions_path
+  end
+
+  def lock
+    # this toggles the value of locked between true and false
+    @question.locked = !@question.locked
+    @question.save
+    redirect_to question_path(@question)
   end
 
   private
