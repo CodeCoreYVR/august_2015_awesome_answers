@@ -5,3 +5,33 @@
 <%# this link to the edit page of the question that shows a form to edit the values already saved %>
 <%= link_to "Edit", edit_question_path(@question), class: "btn btn-info" %>
 <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+<h2>New Answer</h2>
+<% if @answer.errors.any? %>
+  <ul>
+    <% @answer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%# @answer (not persisted)    -> URL: answers_path         (CREATE) %>
+<%# @answer (persisted (in DB) -> URL: answer_path(@answer) (UPDATE) %>
+<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= form_for [@question, @answer] do |f| %>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+  <%= f.submit "Create Answer", class: "btn btn-primary" %>
+<% end %>
+<h2>Answers</h2>
+<% @question.answers.each do |ans| %>
+  <div class="well">
+    <%= ans.body %>
+    <%# question_answer_path({question_id: @question, id: ans}) %>
+    <%# question_answer_path(@question, ans) %>
+    <%# [@question, ans] %>
+    <%= link_to "Delete", question_answer_path(@question, ans), method: :delete,
+                class: "btn btn-sm btn-danger",
+                data: {confirm: "Are you sure?"} %>
+  </div>
+<% end %>

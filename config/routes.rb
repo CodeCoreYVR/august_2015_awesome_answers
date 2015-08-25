@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
 
-  resources :questions
+  # resources :answers
+  resources :questions do
+    # nesting resources :answers in here makes every URL for answers prepended
+    # with /questions/:question_id
+    # resources(:answers, {only: [:create, :destroy]})
+    resources :answers, only: [:create, :destroy]
+  end
+
+  # post "/questions/:question_id/answers" => "answers#create"
+
   # resources questions auto-generates all the routes below
 
   # # this will match any GET request to a url "/questions/new" to the Questions

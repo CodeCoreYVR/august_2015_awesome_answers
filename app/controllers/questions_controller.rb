@@ -32,6 +32,7 @@ class QuestionsController < ApplicationController
   # GET /questions/:id (e.g. /questions/1)
   # this is used to show a page with question information
   def show
+    @answer = Answer.new
   end
 
   # GET /questions

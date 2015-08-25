@@ -1,5 +1,16 @@
 class Question < ActiveRecord::Base
 
+  #  has_many :answers assumes that you have a model Answer that has a reference
+  # to theis model (Question) called question_id (Integer)
+  # the dependent option is needed because we've added a foreign key Contraint
+  # to our database so the dependent records (in this case answers) must do
+  # something before deleting a question that they reference. the options are:
+  # :destroy -> will delete all the answers referencing this question before
+  #             deleting the question
+  # :nullify -> will make question_id field null in the database before deleting
+  #             the quesiton
+  has_many :answers, dependent: :destroy
+
   # this prevents the record from saving or updating unless a title is provided
   validates :title, presence:   {message: "must be present"},
                     # this will check for the uniqueness of the tite/body
