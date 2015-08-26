@@ -6,11 +6,21 @@
 <%= link_to "Edit", edit_question_path(@question), class: "btn btn-info" %>
 <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
 
-<% if @question.locked? %>
+<%= link_to (@question.locked ? "Lock" : "Un-lock"),
+            question_path(@question, {question: {locked: !@question.locked}}),
+            class: "btn btn-warning", method: :patch %>
+
+<!-- <%= form_for @question do |f| %>
+  <%= f.hidden_field :locked, value: !@question.locked %>
+  <%= f.submit @question.locked ? "Lock" : "Un-lock", class: "btn btn-warning" %>
+<% end %> -->
+
+
+<!-- <% if @question.locked? %>
   <%= link_to "Un-Lock", lock_question_path(@question), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-warning" %>
 <% else %>
   <%= link_to "Lock", lock_question_path(@question), method: :patch, data: {confirm: "Are you sure?"}, class: "btn btn-warning" %>
-<% end %>
+<% end %> -->
 
 
 <h2>New Answer</h2>

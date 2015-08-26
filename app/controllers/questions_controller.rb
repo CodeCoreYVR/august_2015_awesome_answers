@@ -38,7 +38,11 @@ class QuestionsController < ApplicationController
   # GET /questions
   # this is used to show a page with listing of all the questions in our DB
   def index
-    @questions = Question.page(params[:page]).per(PER_PAGE)
+    if params[:search]
+      @questions = Question.search(params[:search]).order(params[:order]).page(params[:page]).per(PER_PAGE)
+    else
+      @questions = Question.order(params[:order]).page(params[:page]).per(PER_PAGE)
+    end
   end
 
   # GET /questions/:id/edit (e.g. /questions/123/edit )
@@ -87,7 +91,7 @@ class QuestionsController < ApplicationController
     # the parameters given to be mass-assigned
     # question_params = params.require(:question).permit([:title, :body])
     # question_params =>  {title: "Abc", body: "xyz"}
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :locked)
   end
 
 end

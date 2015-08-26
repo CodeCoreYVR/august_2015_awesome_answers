@@ -1,4 +1,11 @@
+<%= form_tag questions_path, method: :get do %>
+  <%= search_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", class: "btn btn-primary btn-sm" %>
+<% end %>
+
 <h1>All Questions</h1>
+<%= link_to "order by title", questions_path(search: params[:search], order: "title") %>
+<%= link_to "order by body", questions_path(search: params[:search], order: "body") %>
 <% @questions.each do |q| %>
   <%#= link_to q.title, question_path({id: q.id}) %>
   <%#= link_to q.title, q %>

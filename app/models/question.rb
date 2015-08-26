@@ -65,7 +65,6 @@ class Question < ActiveRecord::Base
     query   = []
     terms   = []
     words.split.each do |word|
-      symbol        = "search_term_#{counter}".to_sym
       search_term   = "%#{word}%"
       terms << search_term
       terms << search_term
