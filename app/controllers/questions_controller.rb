@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
 
+  before_action :authenticate_user!, except: [:show, :index]
+
   PER_PAGE = 10
   # the before action takes in a required first argument which references a method
   # that will be executed before every action. You can give it a second arguement
