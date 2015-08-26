@@ -5,6 +5,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+["Art", "Sports", "Cats", "Technology", "Food", "Beer", "Satire"].each do |cat|
+  c = Category.new(name: cat)
+  c.save
+end
+
+all_categories = Category.all
+
 100.times do
   title      = Faker::Company.bs
   body       = Faker::Lorem.paragraph
@@ -12,6 +20,7 @@
   created_at = Time.now - (rand(30)).days
   Question.create({title:      title,
                    body:       body,
+                   category:   all_categories.sample,
                    view_count: view_count,
                    created_at: created_at})
 end

@@ -2,6 +2,7 @@
 <hr>
 <p><%= @question.body %></p>
 <p>View Count: <%= @question.view_count %></p>
+<p>Category: <%= @question.category_name %></p>
 <%# this link to the edit page of the question that shows a form to edit the values already saved %>
 <%= link_to "Edit", edit_question_path(@question), class: "btn btn-info" %>
 <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>

@@ -39,9 +39,9 @@ class QuestionsController < ApplicationController
   # this is used to show a page with listing of all the questions in our DB
   def index
     if params[:search]
-      @questions = Question.search(params[:search]).order(params[:order]).page(params[:page]).per(PER_PAGE)
+      @questions = Questio  n.search(params[:search]).order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
     else
-      @questions = Question.order(params[:order]).page(params[:page]).per(PER_PAGE)
+      @questions = Question.order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
     end
   end
 
@@ -91,7 +91,7 @@ class QuestionsController < ApplicationController
     # the parameters given to be mass-assigned
     # question_params = params.require(:question).permit([:title, :body])
     # question_params =>  {title: "Abc", body: "xyz"}
-    params.require(:question).permit(:title, :body, :locked)
+    params.require(:question).permit(:title, :body, :locked, :category_id)
   end
 
 end

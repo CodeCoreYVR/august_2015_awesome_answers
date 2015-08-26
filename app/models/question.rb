@@ -11,6 +11,8 @@ class Question < ActiveRecord::Base
   #             the quesiton
   has_many :answers, dependent: :destroy
 
+  belongs_to :category
+
   # this prevents the record from saving or updating unless a title is provided
   validates :title, presence:   {message: "must be present"},
                     # this will check for the uniqueness of the tite/body
@@ -72,6 +74,12 @@ class Question < ActiveRecord::Base
     end
     where([query.join(" OR ")] + terms)
   end
+
+  # delegate :name, to: :category # @question.name
+  delegate :name, to: :category, prefix: true # @question.category_name
+  # def category_name
+  #   category.name
+  # end
 
   private
 
