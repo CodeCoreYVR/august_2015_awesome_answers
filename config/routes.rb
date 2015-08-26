@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :answers, only: [:create, :destroy]
   end
 
+  resources :answers, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+
   # post "/questions/:question_id/answers" => "answers#create"
 
   # resources questions auto-generates all the routes below
