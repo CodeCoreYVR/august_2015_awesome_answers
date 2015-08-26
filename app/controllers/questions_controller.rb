@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
   # this is used to show a page with listing of all the questions in our DB
   def index
     if params[:search]
-      @questions = Questio  n.search(params[:search]).order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
+      @questions = Question.search(params[:search]).order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
     else
       @questions = Question.order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
     end
