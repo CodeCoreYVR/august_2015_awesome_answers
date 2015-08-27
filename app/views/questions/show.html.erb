@@ -4,7 +4,7 @@
 <p>View Count: <%= @question.view_count %></p>
 <p>Category: <%= @question.category_name %></p>
 <p>Created by <%= @question.user_name %> on
-                <%= @question.created_at.strftime("%Y-%b-%d") %></p>
+                <%= formatted_date(@question.created_at) %></p>
 <%# this link to the edit page of the question that shows a form to edit the values already saved %>
 <%= link_to "Edit", edit_question_path(@question), class: "btn btn-info" %>
 <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
@@ -54,6 +54,8 @@
     <%= link_to "Delete", question_answer_path(@question, ans), method: :delete,
                 class: "btn btn-sm btn-danger",
                 data: {confirm: "Are you sure?"} %>
+    <p>Created by <%= ans.user_name %> on
+                  <%= formatted_date(ans.created_at) %></p>
     <h3>Add Comment</h3>
     <%= form_for [ans, Comment.new] do |f| %>
       <%= f.text_area :body, placeholder: "add comment here.." %>
