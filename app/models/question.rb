@@ -13,6 +13,8 @@ class Question < ActiveRecord::Base
 
   belongs_to :category
 
+  belongs_to :user
+
   # this prevents the record from saving or updating unless a title is provided
   validates :title, presence:   {message: "must be present"},
                     # this will check for the uniqueness of the tite/body
@@ -73,6 +75,14 @@ class Question < ActiveRecord::Base
       query << "title ILIKE ? OR body ILIKE ?"
     end
     where([query.join(" OR ")] + terms)
+  end
+
+  def user_name
+    if user
+      user.full_name
+    else
+      "Anonymous"
+    end
   end
 
   # delegate :name, to: :category # @question.name
