@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
   def create
     @question      = Question.new(question_params)
     @question.user = current_user
+    Rails.logger.info ">>>>>"
     if @question.save
       # flash[:notice] = "Question created!"
       # passing :notice / :alert only works for redirect
