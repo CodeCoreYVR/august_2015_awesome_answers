@@ -6,8 +6,12 @@
 <p>Created by <%= @question.user_name %> on
                 <%= formatted_date(@question.created_at) %></p>
 <%# this link to the edit page of the question that shows a form to edit the values already saved %>
-<%= link_to "Edit", edit_question_path(@question), class: "btn btn-info" %>
-<%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+<% if can? :edit, @question %>
+  <%= link_to "Edit", edit_question_path(@question), class: "btn btn-info" %>
+<% end %>
+<% if can? :destroy, @question %>
+  <%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+<% end %>
 
 <%= link_to (@question.locked ? "Lock" : "Un-lock"),
             question_path(@question, {question: {locked: !@question.locked}}),

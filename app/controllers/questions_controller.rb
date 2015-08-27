@@ -10,6 +10,8 @@ class QuestionsController < ApplicationController
   # before_action :find_question, except: [:index, :new, :create]
   before_action :find_question, only: [:show, :edit, :update, :destroy, :lock]
 
+  before_action :authorize!, only: [:edit, :update, :destroy]
+
   # the new action is the one that is used by convention in Rails to display
   # a form to create the record (in this case question record)
   def new
@@ -85,6 +87,11 @@ class QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find params[:id]
+  end
+
+  def authorize!
+    # head :unauthorized unless can? :manage, @question
+    redirect_to root_path, alert: "access denied" unless can? :manage, @question
   end
 
   def question_params
