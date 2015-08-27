@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    # get :hello # nested resource -> prepended with /users/:user_id
+    # get :hello, on: :collection # not nested - doens't include :id in URL
+    #                             # (simialr to :new, :index, :create)
+    # get :hello, on: :member     # not nested - includes :id in the URL
+    #                             # very similar to :edit
+    # get :edit, on: :collection
+    # patch :update, on: :collection
+    collection do
+      get   :edit
+      patch :update
+    end
+  end
   resources :sessions, only: [:new, :create] do
     # this will create for us a route with DELETE http verb and /sessions
     # adding the on: :collection option will make it part of the routes for
