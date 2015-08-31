@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
       render "/questions/show"
     end
   end
-
+# comment
   def destroy
     @answer   = Answer.find params[:id]
     @question = Question.find params[:question_id]
