@@ -27,6 +27,17 @@
 <% end %>
 (<%= @question.likes.count %>)
 
+<% if user_signed_in? %>
+  <% if current_user.favourited_question?(@question) %>
+    <%= link_to fa_icon("star"), question_favourite_path(@question, @favourite),
+                  class: "big-icon", title: "Un-Favourite", method: :delete %>
+  <% else %>
+    <%= link_to fa_icon("star-o"), question_favourites_path(@question),
+                  class: "big-icon", method: :post %>
+  <% end %>
+<% end %>
+(<%= @question.favourites.count %>)
+
 <!-- <%= form_for @question do |f| %>
   <%= f.hidden_field :locked, value: !@question.locked %>
   <%= f.submit @question.locked ? "Lock" : "Un-lock", class: "btn btn-warning" %>

@@ -38,8 +38,9 @@ class QuestionsController < ApplicationController
   # GET /questions/:id (e.g. /questions/1)
   # this is used to show a page with question information
   def show
-    @answer = Answer.new
-    @like   = @question.likes.find_by_user_id(current_user.id) if user_signed_in?
+    @answer    = Answer.new
+    @like      = @question.likes.find_by_user_id(current_user.id) if user_signed_in?
+    @favourite = @question.favourites.find_by_user_id(current_user.id) if user_signed_in?
   end
 
   # GET /questions

@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :liked_questions, through: :likes, source: :question
 
+  has_many :favourites, dependent: :destroy
+  has_many :favourited_questions, through: :favourites, source: :question
+
   validates :email, presence: {message: "must be present"}, uniqueness: true,
             format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
@@ -17,6 +20,10 @@ class User < ActiveRecord::Base
 
   def liked_question?(question)
     liked_questions.include?(question)
+  end
+
+  def favourited_question?(question)
+    favourited_questions.include?(question)
   end
 
 end

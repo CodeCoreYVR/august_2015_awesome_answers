@@ -12,7 +12,10 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
 
   has_many :likes, dependent: :destroy
-  has_many :users, through: :likes
+  has_many :liking_users, through: :likes, source: :user
+
+  has_many :favourites, dependent: :destroy
+  has_many :favouriting_users, through: :favourites, source: :user
 
   belongs_to :category
 

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     # resources(:answers, {only: [:create, :destroy]})
     resources :answers, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
+    resources :favourites, only: [:create, :destroy]
   end
 
   resources :answers, only: [] do
