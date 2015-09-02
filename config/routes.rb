@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  # resources :questions do
+  #   get :lock
+  #   get :lock, on: :member
+  #   get :lock, on: :collection
+  # end
+
+
   resources :users, only: [:new, :create] do
     # get :hello # nested resource -> prepended with /users/:user_id
     # get :hello, on: :collection # not nested - doens't include :id in URL

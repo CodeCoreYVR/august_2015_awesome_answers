@@ -57,11 +57,8 @@ group :development, :test do
   gem "awesome_print"
   # hirb is a really helpful gem!!!!!!!!!
   gem "hirb"
-#############################
-#
-# RYAN WAS HERE
-#
-#############################
+
+  gem "rails-erd"
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
