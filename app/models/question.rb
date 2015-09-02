@@ -11,6 +11,9 @@ class Question < ActiveRecord::Base
   #             the quesiton
   has_many :answers, dependent: :destroy
 
+  has_many :likes, dependent: :destroy
+  has_many :users, through: :likes
+
   belongs_to :category
 
   belongs_to :user

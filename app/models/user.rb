@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :nullify
   has_many :answers, dependent: :nullify
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_questions, through: :likes, source: :question
+
   validates :email, presence: {message: "must be present"}, uniqueness: true,
             format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
