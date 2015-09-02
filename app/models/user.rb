@@ -14,4 +14,9 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}".strip
   end
+
+  def liked_question?(question)
+    liked_questions.include?(question)
+  end
+
 end

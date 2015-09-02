@@ -67,6 +67,8 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.10)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hirb (0.7.3)
@@ -84,7 +86,7 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    loofah (2.0.2)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -182,6 +184,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   cowsay (>= 0.2.0)
   faker
+  font-awesome-rails
   hirb
   interactive_editor
   jbuilder (~> 2.0)

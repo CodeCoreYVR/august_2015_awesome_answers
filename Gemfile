@@ -38,6 +38,8 @@ gem "cowsay", ">= 0.2.0"
 
 gem "faker"
 
+gem "font-awesome-rails"
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
