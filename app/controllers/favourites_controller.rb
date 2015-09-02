@@ -1,6 +1,4 @@
-class FavouritesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :find_question
+class FavouritesController < QuestionNestingsController
 
   def create
     favourite = Favourite.new(question: @question, user: current_user)
@@ -21,9 +19,4 @@ class FavouritesController < ApplicationController
     end
   end
 
-  private
-
-  def find_question
-    @question = Question.find params[:question_id]
-  end
 end

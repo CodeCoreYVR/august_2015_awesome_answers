@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
   # :nullify -> will make question_id field null in the database before deleting
   #             the quesiton
   has_many :answers, dependent: :destroy
+  has_many :comments, through: :answers
 
   has_many :likes, dependent: :destroy
   has_many :liking_users, through: :likes, source: :user
@@ -96,6 +97,14 @@ class Question < ActiveRecord::Base
   # def category_name
   #   category.name
   # end
+
+  def like_for(user)
+    likes.find_by_user_id(user.id)
+  end
+
+  def favourite_for(user)
+    favourites.find_by_user_id(user.id)
+  end
 
   private
 

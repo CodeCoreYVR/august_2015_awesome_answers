@@ -18,8 +18,9 @@
             class: "btn btn-warning", method: :patch %>
 <% if user_signed_in? %>
   <% if current_user.liked_question?(@question) %>
-    <%= link_to fa_icon("thumbs-up"), question_like_path(@question, @like),
-                  class: "big-icon", title: "Un-Like", method: :delete %>
+    <%= link_to fa_icon("thumbs-up"),
+                question_like_path(@question, @question.like_for(current_user)),
+                class: "big-icon", title: "Un-Like", method: :delete %>
   <% else %>
     <%= link_to fa_icon("thumbs-o-up"), question_likes_path(@question),
                   class: "big-icon", method: :post %>
@@ -29,8 +30,9 @@
 
 <% if user_signed_in? %>
   <% if current_user.favourited_question?(@question) %>
-    <%= link_to fa_icon("star"), question_favourite_path(@question, @favourite),
-                  class: "big-icon", title: "Un-Favourite", method: :delete %>
+    <%= link_to fa_icon("star"),
+                question_favourite_path(@question, @question.favourite_for(current_user)),
+                class: "big-icon", title: "Un-Favourite", method: :delete %>
   <% else %>
     <%= link_to fa_icon("star-o"), question_favourites_path(@question),
                   class: "big-icon", method: :post %>
