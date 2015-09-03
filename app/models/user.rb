@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :favourites, dependent: :destroy
   has_many :favourited_questions, through: :favourites, source: :question
 
+  has_many :votes, dependent: :destroy
+  has_many :voted_questions, through: :votes, source: :question
+
   validates :email, presence: {message: "must be present"}, uniqueness: true,
             format: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 

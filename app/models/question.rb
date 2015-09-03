@@ -21,6 +21,9 @@ class Question < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
   belongs_to :category
 
   belongs_to :user
