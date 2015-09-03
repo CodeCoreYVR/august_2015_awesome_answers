@@ -14,11 +14,13 @@ class Ability
       q.user == user #|| user.admin?
     end
 
-    can :destroy, [Like, Favourite] do |l|
+    can :destroy, [Like, Favourite, Vote] do |l|
       l.user == user
     end
 
-
+    can :update, Vote do |v|
+      v.user == user
+    end
 
     # Define abilities for the passed in user here. For example:
     #

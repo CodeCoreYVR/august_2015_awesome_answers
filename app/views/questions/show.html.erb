@@ -42,6 +42,40 @@
 <% end %>
 (<%= @question.favourites.count %>)
 
+<% if user_signed_in? %>
+  <% if current_user_vote.nil? %>
+    <%= link_to fa_icon("chevron-up"),
+                question_votes_path(@question, {vote: {up: true}}),
+                class: "big-icon",
+                method: :post %>
+    <%= link_to fa_icon("chevron-down"),
+                question_votes_path(@question, {vote: {up: false}}),
+                class: "big-icon",
+                method: :post %>
+  <% elsif current_user_vote.up? %>
+    <%# user has voted up %>
+    <%= link_to fa_icon("chevron-circle-up"),
+                question_vote_path(@question, current_user_vote),
+                method: :delete,
+                class: "big-icon" %>
+    <%= link_to fa_icon("chevron-down"),
+                question_vote_path(@question, current_user_vote, {vote: {up: false}}),
+                method: :patch,
+                class: "big-icon" %>
+  <% else %>
+    <%# user has voted down %>
+    <%= link_to fa_icon("chevron-up"),
+                question_vote_path(@question, current_user_vote, {vote: {up: true}}),
+                method: :patch,
+                class: "big-icon" %>
+    <%= link_to fa_icon("chevron-circle-down"),
+                question_vote_path(@question, current_user_vote),
+                method: :delete,
+                class: "big-icon" %>
+  <% end %>
+  (<%= @question.votes_count %>)
+<% end %>
+
 <!-- <%= form_for @question do |f| %>
   <%= f.hidden_field :locked, value: !@question.locked %>
   <%= f.submit @question.locked ? "Lock" : "Un-lock", class: "btn btn-warning" %>

@@ -112,6 +112,10 @@ class Question < ActiveRecord::Base
     favourites.find_by_user_id(user.id)
   end
 
+  def votes_count
+    votes.select {|v| v.up? }.count - votes.select {|v| v.down? }.count
+  end
+
   private
 
   def no_monkey
