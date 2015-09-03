@@ -11,6 +11,11 @@
   c.save
 end
 
+["Ruby", "Rails", "Javascript", "HTML", "CSS", "Git", "Github", "SQL", "jQuery",
+  "React.js", "APIs"].each do |tag|
+  Tag.create(name: tag)
+end
+
 all_categories = Category.all
 
 100.times do

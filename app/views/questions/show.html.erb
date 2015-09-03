@@ -3,6 +3,8 @@
 <p><%= @question.body %></p>
 <p>View Count: <%= @question.view_count %></p>
 <p>Category: <%= @question.category_name %></p>
+<!-- <p>Tags: <%= @question.tags.map(&:name).join(", ") %></p> -->
+<p>Tags: <%= @question.tags.map {|x| x.name }.join(", ") %></p>
 <p>Created by <%= @question.user_name %> on
                 <%= formatted_date(@question.created_at) %></p>
 <%# this link to the edit page of the question that shows a form to edit the values already saved %>
