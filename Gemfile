@@ -45,6 +45,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'cancancan'
 
+gem 'simple_form'
+gem "quiet_assets"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

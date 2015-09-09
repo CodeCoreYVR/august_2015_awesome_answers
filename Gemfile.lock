@@ -102,6 +102,8 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.2)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -152,6 +154,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simple_form (3.1.1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     spoon (0.0.4)
       ffi
     spring (1.3.6)
@@ -197,11 +202,13 @@ DEPENDENCIES
   kaminari
   letter_opener
   pg
+  quiet_assets
   rails (= 4.2.3)
   rails-erd
   rails_12factor
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  simple_form
   spring
   turbolinks
   uglifier (>= 1.3.0)

@@ -1,4 +1,15 @@
-<% @question ||= Question.new %>
+<%= simple_form_for (@question || Question.new) , html: {class: "form-horizontal"} do |f| %>
+  <%= f.input :title, hint: "don't put monkey" %>
+  <%= f.input :body, input_html: {placeholder: "Give more details here"} %>
+  <%= f.association :category, include_blank: false %>
+  <%= f.association :tags, as: :check_boxes %>
+  <div class="form-group">
+    <%= f.button :submit, class: "btn-primary", data: {disable_with: "saving.."} %>
+  </div>
+<% end %>
+
+
+<!-- <% @question ||= Question.new %>
 <% if @question.errors.any? %>
   <ul>
     <% @question.errors.full_messages.each do |msg| %>
@@ -44,7 +55,7 @@
   <div class="form-group">
     <%= f.submit class: "btn special-btn-primary", data: {disable_with: "saving.."} %>
   </div>
-<% end %>
+<% end %> -->
 <!--
 <form class="new_question" id="new_question" action="/questions" accept-charset="UTF-8" method="post">
   <input name="utf8" type="hidden" value="✓">

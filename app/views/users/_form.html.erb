@@ -1,34 +1,12 @@
-<%= render "/shared/standard_errors", object: @user %>
-<%# We must give url: option in this case because by default if @user is
-    persisted the form will submit to user_path(@user) which is /users/:id
-    and we changed the routes so that the update actions doens't require :id %>
-<%= form_for @user, url: users_path do |f| %>
-  <div class="form-group">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, class: "form-control" %>
-  </div>
+<%= simple_form_for @user, url: users_path do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
   <% if @user.persisted? %>
-    <div class="form-group">
-      <%= f.label :current_password, "Enter your current password to save changes" %>
-      <%= f.password_field :current_password, class: "form-control" %>
-    </div>
+    <%= f.input :current_password %>
   <% end %>
-  <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: "form-control" %>
-  </div>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
   <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>
   </div>

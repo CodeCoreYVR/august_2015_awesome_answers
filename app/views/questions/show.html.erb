@@ -90,21 +90,11 @@
 
 
 <h2>New Answer</h2>
-<% if @answer.errors.any? %>
-  <ul>
-    <% @answer.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
 <%# @answer (not persisted)    -> URL: answers_path         (CREATE) %>
 <%# @answer (persisted (in DB) -> URL: answer_path(@answer) (UPDATE) %>
 <%#= form_for @answer, url: question_answers_path(@question) do |f| %>
-<%= form_for [@question, @answer] do |f| %>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control" %>
-  </div>
+<%= simple_form_for [@question, @answer] do |f| %>
+  <%= f.input :body %>
   <%= f.submit "Create Answer", class: "btn btn-primary" %>
 <% end %>
 <h2>Answers</h2>
@@ -120,8 +110,8 @@
     <p>Created by <%= ans.user_name %> on
                   <%= formatted_date(ans.created_at) %></p>
     <h3>Add Comment</h3>
-    <%= form_for [ans, Comment.new] do |f| %>
-      <%= f.text_area :body, placeholder: "add comment here.." %>
+    <%= simple_form_for [ans, Comment.new] do |f| %>
+      <%= f.input :body, input_html: {placeholder: "add comment here.."} %>
       <%= f.submit "Comment" %>
     <% end %>
     <% ans.comments.each do |com| %>
