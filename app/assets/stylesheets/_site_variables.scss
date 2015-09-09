@@ -1,0 +1,15 @@
+$brand-primary: orange;
+$brand-danger: #FF6666;
+$border-radius-base: 0px;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin special($color) {
+  background-color: $color;
+  border-color: darken($color, 10%);
+}

@@ -1,3 +1,30 @@
+@import "site_variables";
+$color: green;
+
 h1 {
-  color: green;
+  color: $color;
+}
+
+.special-btn-primary {
+  @include border-radius(10px);
+  background-color: lighten($brand-primary, 10%);
+  border-color: darken($brand-primary, 5%);
+}
+
+p.dark-green {
+  color: darken($color, 12%);
+  .special {
+    color: $brand-primary;
+    .abc {
+      font-size: 15px;
+    }
+  }
+}
+
+.green-button {
+  @include special(green);
+}
+
+.red-button {
+  @include special(red);
 }

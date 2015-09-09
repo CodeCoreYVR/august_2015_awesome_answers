@@ -49,6 +49,7 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
     end
+    # @question = Question.new
   end
 
   # GET /questions/:id/edit (e.g. /questions/123/edit )

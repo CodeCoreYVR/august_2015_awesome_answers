@@ -1,3 +1,4 @@
+<% @question ||= Question.new %>
 <% if @question.errors.any? %>
   <ul>
     <% @question.errors.full_messages.each do |msg| %>
@@ -17,7 +18,7 @@
       @question) and it will make the form submit a PATCH request in order for this
       form to submit to the update action in our controller. (Edit / Update)
     %>
-<%= form_for @question, html: {class: "form-horizontal"} do |f| %>
+<%= form_for @question , html: {class: "form-horizontal"} do |f| %>
   <%# if you don't pass any option for f.submit it will:
       1. If @question is not persisted it will make the button label "Create [Object Class]"
       2. If @question is persisted it will make the button label "Update [Object Class]" %>
@@ -41,7 +42,7 @@
     <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
   </div>
   <div class="form-group">
-    <%= f.submit class: "btn btn-primary", data: {disable_with: "saving.."} %>
+    <%= f.submit class: "btn special-btn-primary", data: {disable_with: "saving.."} %>
   </div>
 <% end %>
 <!--
