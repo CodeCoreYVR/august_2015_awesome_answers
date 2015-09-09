@@ -1,4 +1,14 @@
 <h1>Subscribe</h1>
+
+<%= text_field_tag "cap-each" %>
+<br>
+<span id="text"></span>
+<br>
+<%= link_to "Click Me",
+            "javascript:void(0);",
+            class: "btn btn-primary",
+              id: "click-me" %>
+
 <%= form_tag "/subscribe" do %>
   <div>
     <%= label_tag :name %>
