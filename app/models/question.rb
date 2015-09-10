@@ -55,6 +55,13 @@ class Question < ActiveRecord::Base
 
   before_save :capitalize_title
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
+
   scope :recent, lambda { order(:created_at).reverse_order }
   scope :recent, -> { order(:created_at).reverse_order }
   def self.recent
@@ -137,3 +144,33 @@ class Question < ActiveRecord::Base
   end
 
 end
+
+
+
+#
+# module HandyMethods
+#
+#   def say_hello
+#     puts "Hello There"
+#   end
+#
+# end
+#
+# class Abc
+#   include HandyMethods
+#   # as if you did:
+#   # def say_hello
+#   #   puts "Hello There"
+#   # end
+# end
+# # a = Abc.new
+# # a.say_hello
+#
+# class Xyz
+#   extend HandyMethods
+#   # as if you did:
+#   # def self.say_hello
+#   #   puts "Hello There"
+#   # end
+# end
+# # Xyz.say_hello

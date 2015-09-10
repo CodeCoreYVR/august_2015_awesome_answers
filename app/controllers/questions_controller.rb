@@ -61,6 +61,7 @@ class QuestionsController < ApplicationController
   # this is used to handle the submission of the question form from the edit page
   # when user is updating the information on a question
   def update
+    @question.slug = nil
     # if updating the question is successful
     if @question.update question_params
       # redirecting to the question show page
@@ -88,7 +89,7 @@ class QuestionsController < ApplicationController
   private
 
   def find_question
-    @question = Question.find params[:id]
+    @question = Question.friendly.find params[:id]
   end
 
   def authorize!

@@ -22,6 +22,10 @@ gem "kaminari"
 
 gem "bootstrap-sass"
 
+gem 'friendly_id'
+
+gem "animate-rails"
+
 gem "rails_12factor", group: :production
 
 # Use jquery as the JavaScript library

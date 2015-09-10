@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @question        = Question.find params[:question_id]
+    @question        = Question.friendly.find params[:question_id]
     # @answer  = @question.answers.new(answer_params)
     @answer          = Answer.new answer_params
     @answer.question = @question
@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
 # comment
   def destroy
     @answer   = Answer.find params[:id]
-    @question = Question.find params[:question_id]
+    @question = Question.friendly.find params[:question_id]
     @answer.destroy
     redirect_to question_path(@question), notice: "Answer deleted."
   end
