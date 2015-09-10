@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     @comment.answer = @answer
     @comment.save
     answer_anchor = ActionController::Base.helpers.dom_id(@answer)
+    CommentsMailer.delay(run_at: 5.minutes.from_now).notify_answer_owner(@comment)
     redirect_to question_path(@answer.question, anchor: answer_anchor),
                               notice: "comment created!"
   end
