@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
     @answer.question = @question
     @answer.user     = current_user
     if @answer.save
-      AnswersMailer.notify_question_owner(@answer).deliver_now
+      AnswersMailer.delay(run_at: 5.minutes.from_now).notify_question_owner(@answer)
       redirect_to question_path(@question), notice: "Answer created!"
     else
       flash[:alert] = "Answer wasn't created"

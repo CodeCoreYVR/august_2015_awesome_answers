@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   #   get :lock, on: :collection
   # end
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   resources :users, only: [:new, :create] do
     # get :hello # nested resource -> prepended with /users/:user_id

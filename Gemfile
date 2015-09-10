@@ -26,6 +26,9 @@ gem 'friendly_id'
 
 gem "animate-rails"
 
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
+
 gem "rails_12factor", group: :production
 
 # Use jquery as the JavaScript library
