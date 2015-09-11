@@ -1,6 +1,7 @@
 <%= simple_form_for (@question || Question.new) , html: {class: "form-horizontal"} do |f| %>
   <%= f.input :title, hint: "don't put monkey" %>
   <%= f.input :body, input_html: {placeholder: "Give more details here"} %>
+  <%= f.input :image %>
   <%= f.association :category, include_blank: false %>
   <%= f.association :tags, as: :check_boxes %>
   <div class="form-group">

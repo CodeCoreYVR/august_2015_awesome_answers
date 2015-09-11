@@ -28,6 +28,8 @@ class Question < ActiveRecord::Base
 
   belongs_to :user
 
+  mount_uploader :image, ImageUploader
+
   # this prevents the record from saving or updating unless a title is provided
   validates :title, presence:   {message: "must be present"},
                     # this will check for the uniqueness of the tite/body

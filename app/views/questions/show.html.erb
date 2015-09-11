@@ -3,6 +3,9 @@
 <p><%= @question.body %></p>
 <p>View Count: <%= @question.view_count %></p>
 <p>Category: <%= @question.category_name %></p>
+<% if @question.image.present? %>
+  <%= image_tag @question.image.url(:medium) %>
+<% end %>
 <!-- <p>Tags: <%= @question.tags.map(&:name).join(", ") %></p> -->
 <p>Tags: <%= @question.tags.map {|x| x.name }.join(", ") %></p>
 <p>Created by <%= @question.user_name %> on

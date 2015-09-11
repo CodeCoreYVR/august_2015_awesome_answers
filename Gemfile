@@ -26,6 +26,10 @@ gem 'friendly_id'
 
 gem "animate-rails"
 
+gem 'carrierwave'
+gem 'mini_magick'
+gem "fog"
+
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 

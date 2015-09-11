@@ -104,7 +104,7 @@ class QuestionsController < ApplicationController
     # the parameters given to be mass-assigned
     # question_params = params.require(:question).permit([:title, :body])
     # question_params =>  {title: "Abc", body: "xyz"}
-    params.require(:question).permit([:title, :body,
+    params.require(:question).permit([:title, :body, :image,
                                      {tag_ids: []},
                                      :locked, :category_id])
   end
