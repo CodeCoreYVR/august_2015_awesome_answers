@@ -1,0 +1,7 @@
+<%# @answer (not persisted)    -> URL: answers_path         (CREATE) %>
+<%# @answer (persisted (in DB) -> URL: answer_path(@answer) (UPDATE) %>
+<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= simple_form_for [@question, @answer], remote: true do |f| %>
+  <%= f.input :body %>
+  <%= f.submit "Create Answer", class: "btn btn-primary" %>
+<% end %>

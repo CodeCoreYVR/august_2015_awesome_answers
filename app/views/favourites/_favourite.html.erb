@@ -1,0 +1,15 @@
+<div id="favourite">
+  <% if user_signed_in? %>
+    <% if current_user.favourited_question?(@question) %>
+      <%= link_to fa_icon("star"),
+                  question_favourite_path(@question, @question.favourite_for(current_user)),
+                  class: "big-icon", title: "Un-Favourite", method: :delete,
+                  remote: true %>
+    <% else %>
+      <%= link_to fa_icon("star-o"), question_favourites_path(@question),
+                    class: "big-icon", method: :post,
+                    remote: true %>
+    <% end %>
+  <% end %>
+  (<%= @question.favourites.count %>)
+</div>

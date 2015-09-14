@@ -1,0 +1,19 @@
+<div id="like">
+  <% if user_signed_in? %>
+    <% if current_user.liked_question?(@question) %>
+      <%= link_to fa_icon("thumbs-up"),
+                  question_like_path(@question, @question.like_for(current_user)),
+                  class: "big-icon",
+                  title: "Un-Like",
+                  method: :delete,
+                  remote: true %>
+    <% else %>
+      <%= link_to fa_icon("thumbs-o-up"),
+                  question_likes_path(@question),
+                  class: "big-icon",
+                  method: :post,
+                  remote: true %>
+    <% end %>
+  <% end %>
+  (<%= @question.likes.count %>)
+</div>

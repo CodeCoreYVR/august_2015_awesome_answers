@@ -1,2 +1,8 @@
 $(".answers").prepend("<%= j render 'answer', ans: @answer %>");
-$("#answer_body").val("");
+
+<%# we need to re-instantiate the @answer variable in here becuase the @Answer
+    variable references a record that has already been created in the database
+    so the form will use PATCH and submit to the update action. We want the
+    form to submit to the create action %>
+<% @answer = Answer.new %>
+$("#new_answer").replaceWith("<%= j render 'form' %>");

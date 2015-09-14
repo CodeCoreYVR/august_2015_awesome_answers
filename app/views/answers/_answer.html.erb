@@ -1,5 +1,5 @@
 <!-- @answer - 55
-     dom_id => answer_55 
+     dom_id(@answer) => answer_55
    -->
 <div class="well" id="<%= dom_id(ans) %>">
   <%= ans.body %>
@@ -8,7 +8,8 @@
   <%# [@question, ans] %>
   <%= link_to "Delete", question_answer_path(@question, ans), method: :delete,
               class: "btn btn-sm btn-danger",
-              data: {confirm: "Are you sure?"} %>
+              data: {confirm: "Are you sure?"},
+              remote: true %>
   <p>Created by <%= ans.user_name %> on
                 <%= formatted_date(ans.created_at) %></p>
   <h3>Add Comment</h3>
@@ -16,9 +17,9 @@
     <%= f.input :body, input_html: {placeholder: "add comment here.."} %>
     <%= f.submit "Comment" %>
   <% end %>
-  <% ans.comments.each do |com| %>
-    <div class="well">
-      <%= com.body %>
-    </div>
-  <% end %>
+    <% ans.comments.each do |com| %>
+      <div class="well">
+        <%= com.body %>
+      </div>
+    <% end %>
 </div>

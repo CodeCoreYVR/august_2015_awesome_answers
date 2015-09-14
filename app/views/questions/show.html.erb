@@ -21,64 +21,51 @@
 <%= link_to (@question.locked ? "Lock" : "Un-lock"),
             question_path(@question, {question: {locked: !@question.locked}}),
             class: "btn btn-warning", method: :patch %>
-<% if user_signed_in? %>
-  <% if current_user.liked_question?(@question) %>
-    <%= link_to fa_icon("thumbs-up"),
-                question_like_path(@question, @question.like_for(current_user)),
-                class: "big-icon", title: "Un-Like", method: :delete %>
-  <% else %>
-    <%= link_to fa_icon("thumbs-o-up"), question_likes_path(@question),
-                  class: "big-icon", method: :post %>
-  <% end %>
-<% end %>
-(<%= @question.likes.count %>)
 
-<% if user_signed_in? %>
-  <% if current_user.favourited_question?(@question) %>
-    <%= link_to fa_icon("star"),
-                question_favourite_path(@question, @question.favourite_for(current_user)),
-                class: "big-icon", title: "Un-Favourite", method: :delete %>
-  <% else %>
-    <%= link_to fa_icon("star-o"), question_favourites_path(@question),
-                  class: "big-icon", method: :post %>
-  <% end %>
-<% end %>
-(<%= @question.favourites.count %>)
-
-<% if user_signed_in? %>
-  <% if current_user_vote.nil? %>
-    <%= link_to fa_icon("chevron-up"),
-                question_votes_path(@question, {vote: {up: true}}),
-                class: "big-icon",
-                method: :post %>
-    <%= link_to fa_icon("chevron-down"),
-                question_votes_path(@question, {vote: {up: false}}),
-                class: "big-icon",
-                method: :post %>
-  <% elsif current_user_vote.up? %>
-    <%# user has voted up %>
-    <%= link_to fa_icon("chevron-circle-up"),
-                question_vote_path(@question, current_user_vote),
-                method: :delete,
-                class: "big-icon" %>
-    <%= link_to fa_icon("chevron-down"),
-                question_vote_path(@question, current_user_vote, {vote: {up: false}}),
-                method: :patch,
-                class: "big-icon" %>
-  <% else %>
-    <%# user has voted down %>
-    <%= link_to fa_icon("chevron-up"),
-                question_vote_path(@question, current_user_vote, {vote: {up: true}}),
-                method: :patch,
-                class: "big-icon" %>
-    <%= link_to fa_icon("chevron-circle-down"),
-                question_vote_path(@question, current_user_vote),
-                method: :delete,
-                class: "big-icon" %>
-  <% end %>
-  (<%= @question.votes_count %>)
-<% end %>
-
+<div class="col-md-3">
+  <div class="col-md-4">
+    <%= render "/likes/like" %>
+  </div>
+  <div class="col-md-4">
+    <%= render "/favourites/favourite" %>
+  </div>
+  <div class="col-md-4">
+    <% if user_signed_in? %>
+      <% if current_user_vote.nil? %>
+        <%= link_to fa_icon("chevron-up"),
+                    question_votes_path(@question, {vote: {up: true}}),
+                    class: "big-icon",
+                    method: :post %>
+        <%= link_to fa_icon("chevron-down"),
+                    question_votes_path(@question, {vote: {up: false}}),
+                    class: "big-icon",
+                    method: :post %>
+      <% elsif current_user_vote.up? %>
+        <%# user has voted up %>
+        <%= link_to fa_icon("chevron-circle-up"),
+                    question_vote_path(@question, current_user_vote),
+                    method: :delete,
+                    class: "big-icon" %>
+        <%= link_to fa_icon("chevron-down"),
+                    question_vote_path(@question, current_user_vote, {vote: {up: false}}),
+                    method: :patch,
+                    class: "big-icon" %>
+      <% else %>
+        <%# user has voted down %>
+        <%= link_to fa_icon("chevron-up"),
+                    question_vote_path(@question, current_user_vote, {vote: {up: true}}),
+                    method: :patch,
+                    class: "big-icon" %>
+        <%= link_to fa_icon("chevron-circle-down"),
+                    question_vote_path(@question, current_user_vote),
+                    method: :delete,
+                    class: "big-icon" %>
+      <% end %>
+      (<%= @question.votes_count %>)
+    <% end %>
+  </div>
+</div>
+<div class="clearfix"></div>
 <!-- <%= form_for @question do |f| %>
   <%= f.hidden_field :locked, value: !@question.locked %>
   <%= f.submit @question.locked ? "Lock" : "Un-lock", class: "btn btn-warning" %>
@@ -93,13 +80,7 @@
 
 
 <h2>New Answer</h2>
-<%# @answer (not persisted)    -> URL: answers_path         (CREATE) %>
-<%# @answer (persisted (in DB) -> URL: answer_path(@answer) (UPDATE) %>
-<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
-<%= simple_form_for [@question, @answer], remote: true do |f| %>
-  <%= f.input :body %>
-  <%= f.submit "Create Answer", class: "btn btn-primary" %>
-<% end %>
+<%= render "/answers/form" %>
 <h2>Answers</h2>
 <div class="answers">
   <% @question.answers.latest_first.each do |ans| %>

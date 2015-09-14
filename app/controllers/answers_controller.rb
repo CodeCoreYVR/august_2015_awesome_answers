@@ -20,7 +20,6 @@ class AnswersController < ApplicationController
         # so in this case it will be: create_success.js.erb
         format.js   { render :create_success }
       else
-        flash[:alert] = "Answer wasn't created"
         # this will render show.html.erb within questions folder (in views)
         # we're choosing to use "render" in here because we want to display
         # the errors resulting from unsuccessful save of @answer. The errors
@@ -28,8 +27,11 @@ class AnswersController < ApplicationController
         # @answer.errors
         # using redirect makes a whole new request cycles so we lose the @answer
         # object
-        format.html { render "/questions/show" }
-        format.js   { render js: "alert(\"answer didn't save correctly!\");" }
+        format.html do
+          flash[:alert] = "Answer wasn't created"
+          render "/questions/show"
+        end
+        format.js   { render :create_failure }
       end
     end
   end
@@ -38,7 +40,10 @@ class AnswersController < ApplicationController
     @answer   = Answer.find params[:id]
     @question = Question.friendly.find params[:question_id]
     @answer.destroy
-    redirect_to question_path(@question), notice: "Answer deleted."
+    respond_to do |format|
+      format.html { redirect_to question_path(@question), notice: "Answer deleted." }
+      format.js   { render }
+    end
   end
 
   private

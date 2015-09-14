@@ -1,0 +1,3 @@
+<%# j is a Rails helper method that escapses a string to make it work properly
+    with Javascript, mainly by putting \ characters before all " characters %>
+$("#new_answer").replaceWith("<%= j render 'form' %>");

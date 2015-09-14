@@ -2,20 +2,28 @@ class FavouritesController < QuestionNestingsController
 
   def create
     favourite = Favourite.new(question: @question, user: current_user)
-    if favourite.save
-      redirect_to @question, notice: "Favourited!"
-    else
-      redirect_to @question, alert: "Can't Favourited!"
+    respond_to do |format|
+      if favourite.save
+        format.html { redirect_to @question, notice: "Favourited!" }
+        format.js   { render }
+      else
+        format.html { redirect_to @question, alert: "Can't Favourited!" }
+        format.js   { render }
+      end
     end
   end
 
   def destroy
     favourite = Favourite.find params[:id]
-    if can? :destroy, favourite
-      favourite.destroy
-      redirect_to @question, notice: "Removed Favourite Status"
-    else
-      redirect_to root_path, alert: "access denied"
+    respond_to do |format|
+      if can? :destroy, favourite
+        favourite.destroy
+        format.html { redirect_to @question, notice: "Removed Favourite Status" }
+        format.js   { render }
+      else
+        format.html { redirect_to root_path, alert: "access denied" }
+        format.js   { render }
+      end
     end
   end
 
