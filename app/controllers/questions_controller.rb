@@ -38,7 +38,12 @@ class QuestionsController < ApplicationController
   # GET /questions/:id (e.g. /questions/1)
   # this is used to show a page with question information
   def show
-    @answer = Answer.new
+    respond_to do |format|
+      @answer = Answer.new
+      format.html { render }
+      format.json { render json: @question }
+      format.xml  { render xml: @question }
+    end
   end
 
   # GET /questions

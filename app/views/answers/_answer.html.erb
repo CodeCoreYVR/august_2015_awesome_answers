@@ -1,0 +1,24 @@
+<!-- @answer - 55
+     dom_id => answer_55 
+   -->
+<div class="well" id="<%= dom_id(ans) %>">
+  <%= ans.body %>
+  <%# question_answer_path({question_id: @question, id: ans}) %>
+  <%# question_answer_path(@question, ans) %>
+  <%# [@question, ans] %>
+  <%= link_to "Delete", question_answer_path(@question, ans), method: :delete,
+              class: "btn btn-sm btn-danger",
+              data: {confirm: "Are you sure?"} %>
+  <p>Created by <%= ans.user_name %> on
+                <%= formatted_date(ans.created_at) %></p>
+  <h3>Add Comment</h3>
+  <%= simple_form_for [ans, Comment.new] do |f| %>
+    <%= f.input :body, input_html: {placeholder: "add comment here.."} %>
+    <%= f.submit "Comment" %>
+  <% end %>
+  <% ans.comments.each do |com| %>
+    <div class="well">
+      <%= com.body %>
+    </div>
+  <% end %>
+</div>

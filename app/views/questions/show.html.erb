@@ -96,31 +96,13 @@
 <%# @answer (not persisted)    -> URL: answers_path         (CREATE) %>
 <%# @answer (persisted (in DB) -> URL: answer_path(@answer) (UPDATE) %>
 <%#= form_for @answer, url: question_answers_path(@question) do |f| %>
-<%= simple_form_for [@question, @answer] do |f| %>
+<%= simple_form_for [@question, @answer], remote: true do |f| %>
   <%= f.input :body %>
   <%= f.submit "Create Answer", class: "btn btn-primary" %>
 <% end %>
 <h2>Answers</h2>
-<% @question.answers.each do |ans| %>
-  <div class="well" id="<%= dom_id(ans) %>">
-    <%= ans.body %>
-    <%# question_answer_path({question_id: @question, id: ans}) %>
-    <%# question_answer_path(@question, ans) %>
-    <%# [@question, ans] %>
-    <%= link_to "Delete", question_answer_path(@question, ans), method: :delete,
-                class: "btn btn-sm btn-danger",
-                data: {confirm: "Are you sure?"} %>
-    <p>Created by <%= ans.user_name %> on
-                  <%= formatted_date(ans.created_at) %></p>
-    <h3>Add Comment</h3>
-    <%= simple_form_for [ans, Comment.new] do |f| %>
-      <%= f.input :body, input_html: {placeholder: "add comment here.."} %>
-      <%= f.submit "Comment" %>
-    <% end %>
-    <% ans.comments.each do |com| %>
-      <div class="well">
-        <%= com.body %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<div class="answers">
+  <% @question.answers.latest_first.each do |ans| %>
+    <%= render "/answers/answer", ans: ans %>
+  <% end %>
+</div>
