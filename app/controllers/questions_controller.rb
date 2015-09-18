@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       @answer = Answer.new
       format.html { render }
-      format.json { render json: @question }
+      format.json { render json: {question: @question, answers: @question.answers} }
       format.xml  { render xml: @question }
     end
   end
@@ -49,10 +49,15 @@ class QuestionsController < ApplicationController
   # GET /questions
   # this is used to show a page with listing of all the questions in our DB
   def index
+    per_page = params[:per_page] || PER_PAGE
     if params[:search]
-      @questions = Question.search(params[:search]).order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
+      @questions = Question.search(params[:search]).order("#{params[:order]}").page(params[:page]).per(per_page)
     else
-      @questions = Question.order("#{params[:order]}").page(params[:page]).per(PER_PAGE)
+      @questions = Question.order("#{params[:order]}").page(params[:page]).per(per_page)
+    end
+    respond_to do |format|
+      format.json { render json: @questions }
+      format.html { render  }
     end
     # @question = Question.new
   end

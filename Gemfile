@@ -30,6 +30,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem "fog"
 
+gem 'rack-cors', :require => 'rack/cors'
+
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 

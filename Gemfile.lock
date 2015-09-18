@@ -233,6 +233,7 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -344,6 +345,7 @@ DEPENDENCIES
   mini_magick
   pg
   quiet_assets
+  rack-cors
   rails (= 4.2.3)
   rails-erd
   rails_12factor
