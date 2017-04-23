@@ -47,6 +47,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Gem faker is used to generate fake data
+# Gem cowsay is used to entertain David
+
 gem "cowsay", ">= 0.2.0"
 
 gem "faker"
